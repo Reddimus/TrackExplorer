@@ -3,9 +3,9 @@
 // By Kevin Martinez
 #include "MathEqs.h"
 // IR sensor measurements
-uint16_t x_ir[6] = {IR09CM, 	IR15CM, IR20CM, IR30CM, IR40CM, IR80CM};  	// x points that represent the IR voltage values
-uint16_t y_dist[6] = {9, 			15,     20,     30,     40,     80};      	// y points that represent distance
-char n_pts = sizeof(x_ir)/sizeof(x_ir[0]); 																// size of x and y arr
+uint16_t x_ir[6] = {IR09CM, 	IR15CM, IR20CM, IR30CM, IR40CM, IR80CM}; 			// x points that represent the IR voltage values
+uint16_t y_dist[6] = {9, 			15,     20,     30,     40,     80}; 		// y points that represent distance
+char n_pts = sizeof(x_ir)/sizeof(x_ir[0]);  							// size of x and y arr
 /*
 // T: O(n^2) M: O(1)    Complexity, where n is len of x & y arr
 double LagrangePoly(uint16_t x[], uint16_t y[], double fx, char n){
@@ -46,11 +46,11 @@ uint16_t CalcDist(uint16_t adc_out){
     else if(adc_out >= IR09CM * .98) return 9; 
     // Search for 2 closest points of adc_out using Binary Search
     //char *idxs_range = BinSearch_range(x_ir, adc_out, n_pts, 1);
-		char l_idx = BinSearch_range(x_ir, adc_out, n_pts, 1);
-		char r_idx = l_idx + 1;
+    char l_idx = BinSearch_range(x_ir, adc_out, n_pts, 1);
+    char r_idx = l_idx + 1;
     uint16_t dist_range[2] = {y_dist[l_idx], y_dist[r_idx]};
     uint16_t ir_range[2] = {x_ir[l_idx], x_ir[r_idx]};
-		//free(idxs_range); 	// deallocate dynamically allocated memory as no longer needed
+    //free(idxs_range); 	// deallocate dynamically allocated memory as no longer needed
     // Approximate linear distance between both points
     double range_perc = 1 - (double) (adc_out - ir_range[1]) / (ir_range[0] - ir_range[1]);
     uint16_t dist = dist_range[0] + ((dist_range[1] - dist_range[0]) * range_perc);
