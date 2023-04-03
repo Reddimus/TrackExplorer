@@ -50,15 +50,15 @@ extern void WaitForInterrupt(void);  // low power mode
 
 // You use datasheet to calculate the following ADC values
 // then test your sensors to adjust the values 
-#define MAXCM 						80 		// Sharp IR sensors only measure up to 80CM
-#define CRASH             15 		// if there is less than this distance ahead of the robot, it will immediately stop
+#define MAXCM 	80 	// Sharp IR sensors only measure up to 80CM
+#define CRASH 	15 	// if there is less than this distance ahead of the robot, it will immediately stop
 
 // with equal power to both motors (LeftH == RightH), the robot still may not drive 
 // straight due to mechanical differences in the motors, so bias the left wheel faster 
 // or slower than the constant right wheel
-#define LEFTPOWER        	0.89 * TOTAL_PERIOD 	// duty cycle of left wheel 
-#define RIGHTPOWER        0.99 * TOTAL_PERIOD 	// duty cycle of right wheel
-#define NOPOWER 					1
+#define LEFTPOWER 	0.77 * TOTAL_PERIOD 	// duty cycle of left wheel 
+#define RIGHTPOWER 	0.99 * TOTAL_PERIOD 	// duty cycle of right wheel
+#define NOPOWER 	1
 
 void System_Init(void);
 void steering(uint16_t left_dist, uint16_t ahead_dist, uint16_t right_dist);
@@ -71,12 +71,12 @@ int main(void){
   System_Init();
   EnableInterrupts();   // enable after all initialization are done
 	LED = Dark;
-  // TODO: Calibrate the sensors: read at least 5 times from the sensor 
+  	// Calibrate the sensors: read at least 5 times from the sensor 
 	// before the car starts to move: this will allow software to filter the sensor outputs.	
 	for (char x = 0; x < 10; x++){
 		ReadSensorsMedianFilter(&left, &ahead, &right); 	//sensor test
 	}
-	// TODO: start with moving forward, LED green when SW1 is pressed
+	// start with moving forward, LED green when SW1 is pressed
 	GPIOPortF_Handler();
   while(1){
 		// choose one of the following three software filter methods
@@ -89,11 +89,11 @@ int main(void){
 }
 
 void System_Init(void) {
-  PLL_Init();           // bus clock at 16 MHz
-	Sensors_Init();       // inits ADC to sample AIN2 (PE1), AIN9 (PE4), AIN8 (PE5)
-	LEDSW_Init();         // configure onboard LEDs and push buttons; LEDs = PF321, Onboard Switches = PF40
-	Car_Dir_Init();				// PB5432 for use with DRV8838 motor driver direction
-  Motors_Init();        // Initialize signals for the two DC Motors
+  PLL_Init(); 			// bus clock at 16 MHz
+	Sensors_Init(); 	// inits ADC to sample AIN2 (PE1), AIN9 (PE4), AIN8 (PE5)
+	LEDSW_Init(); 		// configure onboard LEDs and push buttons; LEDs = PF321, Onboard Switches = PF40
+	Car_Dir_Init(); 	// PB5432 for use with DRV8838 motor driver direction
+  Motors_Init(); 		// Initialize signals for the two DC Motors
 }
 
 void GPIOPortF_Handler(void){
@@ -126,10 +126,10 @@ void steering(uint16_t left_dist, uint16_t ahead_dist, uint16_t right_dist){
 	else {
 		LED = Red;
 		if (ahead_dist <= CRASH){
-			if (left_dist > right_dist) move_l_piv(); 	// if left opening turn left in place
-			else move_r_piv(); 													// if right opening turn right in place
+			if (right_dist > CRASH) move_r_piv(); 	// if left opening turn right in place
+			else move_l_piv(); 			// if right opening turn left in place
 		}
-		else if (left_dist < right_dist){
+		else if (left_dist <= CRASH){
 			move_r_turn();
 		}
 		else{
