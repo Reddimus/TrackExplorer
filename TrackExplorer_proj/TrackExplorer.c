@@ -65,11 +65,10 @@ void steering(uint16_t left_dist, uint16_t ahead_dist, uint16_t right_dist);
 void GPIOPortF_Handler(void);
 
 int main(void){
-  uint16_t left, right, ahead;
-  
-  DisableInterrupts();  // disable interrupts while initializing
-  System_Init();
-  EnableInterrupts();   // enable after all initialization are done
+	uint16_t left, right, ahead;
+	DisableInterrupts();  // disable interrupts while initializing
+	System_Init();
+	EnableInterrupts();   // enable after all initialization are done
 	LED = Dark;
   	// Calibrate the sensors: read at least 5 times from the sensor 
 	// before the car starts to move: this will allow software to filter the sensor outputs.	
@@ -78,27 +77,27 @@ int main(void){
 	}
 	// start with moving forward, LED green when SW1 is pressed
 	GPIOPortF_Handler();
-  while(1){
+	while(1){
 		// choose one of the following three software filter methods
 		ReadSensorsMedianFilter(&left, &ahead, &right);
 		//ReadSensorsIIRFilter(&ahead, &right, &left);
 		//ReadSensorsFIRFilter(&left, &ahead, &right);
 		uint16_t l_dist = CalcDist(left), m_dist = CalcDist(ahead), r_dist = CalcDist(right);
 		steering(l_dist, m_dist, r_dist);
-  }
+	}
 }
 
 void System_Init(void) {
-  PLL_Init(); 			// bus clock at 16 MHz
+	PLL_Init(); 		// bus clock at 16 MHz
 	Sensors_Init(); 	// inits ADC to sample AIN2 (PE1), AIN9 (PE4), AIN8 (PE5)
 	LEDSW_Init(); 		// configure onboard LEDs and push buttons; LEDs = PF321, Onboard Switches = PF40
 	Car_Dir_Init(); 	// PB5432 for use with DRV8838 motor driver direction
-  Motors_Init(); 		// Initialize signals for the two DC Motors
+	Motors_Init(); 		// Initialize signals for the two DC Motors
 }
 
 void GPIOPortF_Handler(void){
-  if(GPIO_PORTF_RIS_R&SW2){  // SW2 pressed
-    GPIO_PORTF_ICR_R = SW2;  // acknowledge flag0
+	if(GPIO_PORTF_RIS_R&SW2){  // SW2 pressed
+		GPIO_PORTF_ICR_R = SW2;  // acknowledge flag0
 		PWM_Duty(NOPOWER, NOPOWER);
 	}
 	if(GPIO_PORTF_RIS_R&SW1){  // SW1 pressed
