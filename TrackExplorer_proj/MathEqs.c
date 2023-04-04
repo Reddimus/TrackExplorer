@@ -1,6 +1,17 @@
 // MathEqs.c
 // Runs on TM4C123
 // By Kevin Martinez
+/*
+Matheqs files are dedicated approximation methods. Matheqs aims to solve the issue of approximating IR sensor measurements
+without a constant equation, as sharp IR sensors datasheet does not include a constant equation. The function of interest 
+is CalcDist. CalcDist uses ADC output values and turns them into readable cm values. In order to accomplish this 
+approximation with <= 16 Mhz clock speed we need optimal time complexity otherwise approximations may be computationally 
+to intensive and the car will crash before the car can adjust. To achieve optimal time complexity we need to use a combination 
+of binary search and linear vector approximation. 
+If TM4C123 is clocked at a higher speed (>= 32 Mhz) Lagrange polynomail method can be used. Lagrange polynomail is more accurate, 
+however more computationally more intensive and you may need to take into account a few more edge cases.
+*/
+
 #include "MathEqs.h"
 // IR sensor measurements
 uint16_t x_ir[6] = {IR09CM, 	IR15CM, IR20CM, IR30CM, IR40CM, IR80CM}; 			// x points that represent the IR voltage values
