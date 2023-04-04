@@ -1,6 +1,10 @@
 // Move.c
 // Runs on TM4C123
 // By Kevin Martinez
+/*
+Move file is a list of functions dedicated to all possible movements on a 2 motored car. 
+By changing directions and or turning on/ off 1 or 2 motors you get 9 possible movements.
+*/
 #include "tm4c123gh6pm.h"
 #include "Motors.h"
 #include "Move.h"
@@ -18,7 +22,7 @@ void move_backward(void){
 	PWM1_ENABLE_R |= R_MOTOR;		// enable right wheel
 }
 
-// Turn right in place
+// Turn left in place
 void move_l_piv(void){
 	WHEEL_DIR = LEFTPIVOT;
 	PWM0_ENABLE_R |= L_MOTOR;		// enable left wheel
