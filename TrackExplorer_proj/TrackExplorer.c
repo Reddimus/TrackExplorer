@@ -56,8 +56,8 @@ extern void WaitForInterrupt(void);  // low power mode
 // with equal power to both motors (LeftH == RightH), the robot still may not drive 
 // straight due to mechanical differences in the motors, so bias the left wheel faster 
 // or slower than the constant right wheel
-#define LEFTPOWER 	0.77 * TOTAL_PERIOD 	// duty cycle of left wheel 
-#define RIGHTPOWER 	0.99 * TOTAL_PERIOD 	// duty cycle of right wheel
+#define LEFTPOWER 	0.77 * TOTAL_PERIOD // duty cycle of left wheel 
+#define RIGHTPOWER 	0.99 * TOTAL_PERIOD // duty cycle of right wheel
 #define NOPOWER 	1
 
 void System_Init(void);
@@ -66,14 +66,14 @@ void GPIOPortF_Handler(void);
 
 int main(void){
 	uint16_t left, right, ahead;
-	DisableInterrupts();  // disable interrupts while initializing
+	DisableInterrupts();		// disable interrupts while initializing
 	System_Init();
-	EnableInterrupts();   // enable after all initialization are done
+	EnableInterrupts();			// enable after all initialization are done
 	LED = Dark;
   	// Calibrate the sensors: read at least 5 times from the sensor 
 	// before the car starts to move: this will allow software to filter the sensor outputs.	
 	for (char x = 0; x < 10; x++){
-		ReadSensorsMedianFilter(&left, &ahead, &right); 	//sensor test
+		ReadSensorsMedianFilter(&left, &ahead, &right);		//sensor test
 	}
 	// start with moving forward, LED green when SW1 is pressed
 	GPIOPortF_Handler();
@@ -97,11 +97,11 @@ void System_Init(void) {
 
 void GPIOPortF_Handler(void){
 	if(GPIO_PORTF_RIS_R&SW2){  // SW2 pressed
-		GPIO_PORTF_ICR_R = SW2;  // acknowledge flag0
+		GPIO_PORTF_ICR_R = SW2; 	// acknowledge flag0
 		PWM_Duty(NOPOWER, NOPOWER);
 	}
 	if(GPIO_PORTF_RIS_R&SW1){  // SW1 pressed
-		GPIO_PORTF_ICR_R = SW1;  // acknowledge flag4
+		GPIO_PORTF_ICR_R = SW1; 	// acknowledge flag4
 		PWM_Duty(LEFTPOWER, RIGHTPOWER);
 		LED = Dark;
 		LED = Green;
@@ -114,7 +114,7 @@ void steering(uint16_t left_dist, uint16_t ahead_dist, uint16_t right_dist){
 	// if sensors dist out of range (80 cm) objective reached 
 	if (MAXCM <= left_dist && MAXCM <= ahead_dist && MAXCM <= right_dist){
 		LED = Blue;
-		move_stop();	// open end
+		move_stop(); // open end
 	}
 	// elif walls are not to close; Case (111)
 	else if (CRASH < left_dist && CRASH < ahead_dist && CRASH < right_dist){
@@ -126,7 +126,7 @@ void steering(uint16_t left_dist, uint16_t ahead_dist, uint16_t right_dist){
 		LED = Red;
 		if (ahead_dist <= CRASH){
 			if (right_dist > CRASH) move_r_piv(); 	// if left opening turn right in place
-			else move_l_piv(); 			// if right opening turn left in place
+			else move_l_piv();						// if right opening turn left in place
 		}
 		else if (left_dist <= CRASH){
 			move_r_turn();
