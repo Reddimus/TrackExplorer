@@ -112,7 +112,7 @@ void GPIOPortF_Handler(void){
 void steering(uint16_t left_dist, uint16_t ahead_dist, uint16_t right_dist){
 	LED = Dark;
 	// if sensors dist out of range (80 cm) objective reached 
-	if (MAXCM <= left_dist && MAXCM <= ahead_dist && MAXCM <= right_dist){
+	if (MAXCM - 1 <= left_dist && MAXCM - 1 <= ahead_dist && MAXCM - 1 <= right_dist){
 		LED = Blue;
 		move_stop(); // open end
 	}
