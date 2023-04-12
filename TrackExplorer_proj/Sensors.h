@@ -34,5 +34,5 @@ void Sensors_In(uint16_t *ain2, uint16_t *ain9, uint16_t *ain8);
 // Three software filter methods
 void ReadSensorsFIRFilter(uint16_t *ain2, uint16_t *ain9, uint16_t *ain8);
 void ReadSensorsIIRFilter(uint16_t *ain2, uint16_t *ain9, uint16_t *ain8);
-void ReadSensorsMedianFilter(uint16_t *ain2, uint16_t *ain9, uint16_t *ain8);// This function samples AIN2 (PE1), AIN9 (PE4), AIN8 (PE5) and
+void ReadSensorsMedianFilter(uint16_t *ain2, uint16_t *ain9, uint16_t *ain8); // This function samples AIN2 (PE1), AIN9 (PE4), AIN8 (PE5) and
 

@@ -37,7 +37,7 @@ void Motor_0_Init(void){
 	PWM0_ENABLE_R &= ~0x00000001;	// Disable PB7:PWM0 output 1 on initialization
 }
 
-// PB7 right motor Hardware PWM1
+// PA7 right motor Hardware PWM1
 void Motor_1_Init(void){
 	// Initialize Port A 7
 	if ((SYSCTL_RCGC2_R&SYSCTL_RCGC2_GPIOA)==0) {
@@ -56,7 +56,7 @@ void Motor_1_Init(void){
 	PWM1_1_CMPB_R = 0;	// count value when output rises
 	
 	PWM1_1_CTL_R |= 0x00000001;	// Enable PWM1 Generator 1 in Countdown mode
-	PWM1_ENABLE_R &= ~0x00000008;	// Disable PWM1 output 3 for PB 7
+	PWM1_ENABLE_R &= ~0x00000008;	// Disable PWM1 output 3 for PA 7
 }
 
 // Dependency: Motors_Init() 	// initialize PWM1&0
@@ -80,9 +80,9 @@ void Car_Dir_Init(void){
 		while ((SYSCTL_RCGC2_R&SYSCTL_RCGC2_GPIOB)==0){};
 	}
 		
-  GPIO_PORTB_AMSEL_R &= ~0x3C;	// disable analog function
-	GPIO_PORTB_AFSEL_R &= ~0x3C;	// no alternate function
-  GPIO_PORTB_PCTL_R &= ~0x00FFFF00;	// GPIO clear bit PCTL 
+	GPIO_PORTB_AMSEL_R &= ~0x3C; // disable analog function
+	GPIO_PORTB_AFSEL_R &= ~0x3C; // no alternate function
+  	GPIO_PORTB_PCTL_R &= ~0x00FFFF00;	// GPIO clear bit PCTL 
 	GPIO_PORTB_DIR_R |= 0x3C; // output on pin(s)
-  GPIO_PORTB_DEN_R |= 0x3C;	// enable digital I/O on pin(s)
+  	GPIO_PORTB_DEN_R |= 0x3C;	// enable digital I/O on pin(s)
 }

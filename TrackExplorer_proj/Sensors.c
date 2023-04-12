@@ -93,8 +93,6 @@ void ReadSensorsFIRFilter(uint16_t *ain2, uint16_t *ain9, uint16_t *ain8){
   static uint16_t ain2previous=0; // after the first call, the value changed to 12
   static uint16_t ain9previous=0;
   static uint16_t ain8previous=0;
-  // save some memory; these do not need to be 'static'
-  //            x(n)
   uint16_t ain2newest;
   uint16_t ain9newest;
   uint16_t ain8newest;
@@ -151,12 +149,10 @@ uint16_t result;
 // y(n) = median(x(n), x(n-1), x(n-2))
 // Assumes: ADC initialized by previously calling Sensors_Init()
 void ReadSensorsMedianFilter(uint16_t *ain2, uint16_t *ain9, uint16_t *ain8){
-  //                   x(n-2)        x(n-1)
+  // x(n-2)  x(n-1)
   static uint16_t ain2oldest=0, ain2middle=0;
   static uint16_t ain9oldest=0, ain9middle=0;
   static uint16_t ain8oldest=0, ain8middle=0;
-  // save some memory; these do not need to be 'static'
-  //            x(n)
   uint16_t ain2newest;
   uint16_t ain9newest;
   uint16_t ain8newest;
