@@ -12,28 +12,28 @@ By changing directions and or turning on/ off 1 or 2 motors you get 9 possible m
 // Car movements
 void move_forward(void){
 	WHEEL_DIR = FORWARD;
-	PWM0_ENABLE_R |= L_MOTOR;		// enable left wheel
-	PWM1_ENABLE_R |= R_MOTOR;		// enable right wheel
+	PWM0_ENABLE_R |= L_MOTOR;	// enable left wheel
+	PWM1_ENABLE_R |= R_MOTOR;	// enable right wheel
 }
 
 void move_backward(void){
 	WHEEL_DIR = BACKWARD;
-	PWM0_ENABLE_R |= L_MOTOR;		// enable left wheel
-	PWM1_ENABLE_R |= R_MOTOR;		// enable right wheel
+	PWM0_ENABLE_R |= L_MOTOR;	// enable left wheel
+	PWM1_ENABLE_R |= R_MOTOR;	// enable right wheel
 }
 
 // Turn left in place
 void move_l_piv(void){
 	WHEEL_DIR = LEFTPIVOT;
-	PWM0_ENABLE_R |= L_MOTOR;		// enable left wheel
-	PWM1_ENABLE_R |= R_MOTOR;		// enable right wheel
+	PWM0_ENABLE_R |= L_MOTOR;	// enable left wheel
+	PWM1_ENABLE_R |= R_MOTOR;	// enable right wheel
 }
 
 // Turn right in place
 void move_r_piv(void){
 	WHEEL_DIR = RIGHTPIVOT;
-	PWM0_ENABLE_R |= L_MOTOR;		// enable left wheel
-	PWM1_ENABLE_R |= R_MOTOR;		// enable right wheel
+	PWM0_ENABLE_R |= L_MOTOR;	// enable left wheel
+	PWM1_ENABLE_R |= R_MOTOR;	// enable right wheel
 }
 
 void move_l_turn(void){

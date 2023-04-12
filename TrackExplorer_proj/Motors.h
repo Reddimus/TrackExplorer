@@ -10,4 +10,4 @@
 
 void Motors_Init(void);
 void PWM_Duty(unsigned long duty_L, unsigned long duty_R);
-void Car_Dir_Init(void);// Constant definitions based on the following hardware interface:
+void Car_Dir_Init(void); // Constant definitions based on the following hardware interface:
