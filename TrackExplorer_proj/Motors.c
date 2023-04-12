@@ -64,7 +64,7 @@ void Motor_1_Init(void){
 //	duty_L is the value corresponding to the duty cycle of the left wheel
 //	duty_R is the value corresponding to the duty cycle of the right wheel
 // Outputs: None 
-// Description: Changes the duty cycles of PB76 by changing the CMP registers
+// Description: Changes the duty cycles of PA7 & PB6 by changing the CMP registers
 void PWM_Duty(unsigned long duty_L, unsigned long duty_R){
 	PWM0_0_CMPA_R = duty_L - 1;	// PB6 count value when output rises
 	PWM1_1_CMPB_R = duty_R - 1;	// PA7 count value when output rises
