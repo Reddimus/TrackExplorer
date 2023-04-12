@@ -11,10 +11,10 @@ By changing directions and or turning on/ off 1 or 2 motors you get 9 possible m
 
 // PB5432 are used for direction control on DRV8838.
 // Motor 1 is connected to the left wheel, Motor 2 is connected to the right wheel.
-#define FORWARD 0x28
-#define BACKWARD 0x3C
-#define LEFTPIVOT 0x18
-#define RIGHTPIVOT 0x24
+#define FORWARD     0x28
+#define BACKWARD    0x3C
+#define LEFTPIVOT   0x18
+#define RIGHTPIVOT  0x24
 
 #define L_MOTOR 0x00000001
 #define R_MOTOR 0x00000008
