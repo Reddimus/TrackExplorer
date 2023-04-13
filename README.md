@@ -8,7 +8,7 @@ The robot car will autonomously explore a track with two walls, starting at the 
 
 ## Hardware Requirements
 
-1. PLL is required to set the system clock to be 16MHz using an external clock source.
+1. PLL is required to set the system clock to be 50MHz using an external clock source.
 2. Hardware PWM is required to drive the DC motors.
 3. Three IR sensors are required for the robot to detect obstacles around it.
 4. GPIO assignments:
@@ -19,7 +19,7 @@ The robot car will autonomously explore a track with two walls, starting at the 
 | PE4       | Front sensor output      |
 | PE5       | Right IR sensor output   |
 | PB6       | Hardware PWM output for left motor   |
-| PB7       | Hardware PWM output for right motor  |
+| PA7       | Hardware PWM output for right motor  |
 | PB45      | Direction pins for left motor        |
 | PB23      | Direction pins for right motor       |
 | PF123     | Onboard color LEDs                  |
@@ -30,14 +30,14 @@ The robot car will autonomously explore a track with two walls, starting at the 
 
 | Color | Indication                                              |
 |-------|---------------------------------------------------------|
-| RED   | Robot Car is too close to an obstacle: less than 10cm away. |
+| RED   | Robot Car is too close to an obstacle: less than 15cm away. |
 | BLUE  | Mission accomplished: the car finished exploring the whole track and back to the open end.        |
 | GREEN | Robot Car is traveling in a safe area: at least 10cm away from any obstacles.                          |
 
 ## Project Highlights
 
 - Embedded Systems project
-- Developed an autonomous mini car to complete a lap on a track by programming an ARM-based MCU in C, using 3 IR sensors, 2 stepper motors, and assembling a power distribution board.
+- Developed an autonomous mini car to complete a lap on a track by programming an ARM-based MCU in C, using 3 IR sensors, 2 DC motors, and assembling a power distribution board.
 - Formulated an optimal time complexity distance algorithm based on analog IR sensor signals, increasing distance calculation throughput by 50%.
 - Configured a hardware-based Pulse Width Modulation (PWM) to evenly distribute power across 2 stepper motors, allowing fine-tuning of the car’s velocity and alignment.
 - Soldered, assembled, and designed schematic.
@@ -48,7 +48,7 @@ Phase Locked Loop (PLL) is utilized to generate a stable output high frequency f
 
 ### Hardware PWM and DC Motors
 
-Hardware PWM was utilized to control the DC Motors of the robot. Hardware PWM is used to control the power delivered to the DC motors, providing an efficient and accurate way to control current delivered to the motors. The L298N motor driver was also utilized in order to drive the direction and speed of the DC motors. This is an H-bridge that enables a voltage to be applied across a load in either direction depending on the preference of the user. The L298N motor driver has two pins for PWM speed to allow the user to configure the speed of the motors depending on their respective duty cycles.
+Hardware PWM was utilized to control the DC Motors of the robot. Hardware PWM is used to control the power delivered to the DC motors, providing an efficient and accurate way to control current delivered to the motors. The Pololu Motor Driver and Power Distribution Board features two DRV8838 motor drivers, one for each of the chassis’s motors, and a powerful switching step-down regulator that can supply a continuous 2.5 A at 5 V or 3.3 V.
 
 ### GPIO Interrupts
 
@@ -57,3 +57,25 @@ GPIO Interrupts were used in order for the robot to activate and deactivate on t
 ### Analog to Digital Conversion (ADC)
 
 Analog to Digital conversion is required in order to read values from the IR sensors. Analog to Digital conversion is the process of converting an analog signal into a digital signal that can be processed by a digital system such as the TM4C microcontroller. Since we are using IR sensors which are analog components, we must convert the analog signals from the IR sensor’s into a digital signal in order for our IR sensors to read proper values to the microcontroller so that the robot could function as intended.
+
+### Parts List
+- Breadboard
+
+- Jumper wires
+
+- TM4C123 microcontroller
+- USB cable (for programming the microcontroller)
+
+- Power supply (9 volts)
+
+- 3 GP2Y0A21YK0F Sharp analog IR distance sensors
+
+- 2 DC motors
+
+- Pololu - Romi Chassis
+
+- Pololu - Motor Driver and Power Distribution Board for Romi Chassis
+
+- Pololu - Romi Encoder Pair Kit
+
+- KeilUVision5
