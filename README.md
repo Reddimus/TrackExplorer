@@ -1,4 +1,4 @@
-# Autonomous Robot Car Project
+# Autonomous Mini Robot Car Explorer Project
 
 ## Project Description
 
