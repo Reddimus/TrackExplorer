@@ -1,6 +1,5 @@
-// Motors.h
-// Runs on TM4C123
-// By Kevin Martinez
+#ifndef MOTORS_H
+#define MOTORS_H
 
 // configure the system to get its clock from the PLL
 #include "PLL.h"
@@ -11,3 +10,5 @@
 void Motors_Init(void);
 void PWM_Duty(unsigned long duty_L, unsigned long duty_R);
 void Car_Dir_Init(void); // Constant definitions based on the following hardware interface:
+
+#endif
