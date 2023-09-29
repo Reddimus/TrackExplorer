@@ -1,29 +1,21 @@
-// LEDSW.h
-// Runs on TM4C123
-// By Kevin Martinez
+#ifndef LEDSW_H
+#define LEDSW_H
+
 #define LED (*((volatile unsigned long *)0x40025038))  // use onboard three LEDs: PF321
 
-////////// Constants //////////  
-// Color    LED(s) PortF
-// dark     ---    0
-// red      R--    0x02
-// blue     --B    0x04
-// green    -G-    0x08
-// yellow   RG-    0x0A
-// white    RGB    0x0E
-// pink     R-B    0x06
-// Cran     -GB    0x0C
-
-#define Dark    	0x00
-#define Red     	0x02
-#define Blue    	0x04
-#define Green   	0x08
-#define Yellow  	0x0A
-#define Cran        0x0C
-#define White   	0x0E
-#define Purple  	0x06
+// Color    LED(s) PortF        LED(s)
+#define Dark    	0x00    //  ---
+#define Red     	0x02    //  R--
+#define Blue    	0x04    //  --B
+#define Green   	0x08    //  -G-
+#define Yellow  	0x0A    //  RG-
+#define Cran        0x0C    //  -GB
+#define White   	0x0E    //  RGB
+#define Purple  	0x06    //  R-B
 
 #define SW1 0x10 //left switch
 #define SW2 0x01 //right switch
 
 void LEDSW_Init(void);
+
+#endif
